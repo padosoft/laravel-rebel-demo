@@ -30,11 +30,21 @@ return [
     |--------------------------------------------------------------------------
     | Applied before the EnsureAdmin gate (which is always appended).
     |
-    | The web admin panel (laravel-rebel-admin) authenticates with the default
-    | web (session) guard, so the API must run inside the 'web' middleware group
-    | for the session cookie to be read. Use ['auth:sanctum'] instead if you call
-    | the API from a token client.
+    | The web admin panel authenticates with the session (web) guard, so the API
+    | must run inside the 'web' middleware group to read the session cookie.
     */
     'middleware' => ['web'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | GDPR retention tiers
+    |--------------------------------------------------------------------------
+    | Surfaced by GET {prefix}/compliance/overview as the retention summary. Purely
+    | descriptive metadata for the panel; pruning itself lives in the core/retention layer.
+    */
+    'retention_tiers' => [
+        ['name' => 'detail', 'days' => 30],
+        ['name' => 'aggregate', 'days' => 365],
+    ],
 
 ];

@@ -2891,16 +2891,16 @@
         },
         {
             "name": "padosoft/laravel-rebel-admin",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-admin.git",
-                "reference": "ee875dbb5b1088ac465e0b0aded1a9717b7f18ed"
+                "reference": "e053cc220ddb53040a9e491dfb7bab9f34b7d5f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin/zipball/ee875dbb5b1088ac465e0b0aded1a9717b7f18ed",
-                "reference": "ee875dbb5b1088ac465e0b0aded1a9717b7f18ed",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin/zipball/e053cc220ddb53040a9e491dfb7bab9f34b7d5f6",
+                "reference": "e053cc220ddb53040a9e491dfb7bab9f34b7d5f6",
                 "shasum": ""
             },
             "require": {
@@ -2953,22 +2953,22 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-admin/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-admin/tree/v0.1.2"
+                "source": "https://github.com/padosoft/laravel-rebel-admin/tree/v0.1.3"
             },
-            "time": "2026-06-03T14:54:07+00:00"
+            "time": "2026-06-03T16:03:23+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-admin-api",
-            "version": "v0.1.0",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-admin-api.git",
-                "reference": "525f244898f7904908084afa60de7f668aa62b3f"
+                "reference": "c1966c8bd17bdecd281fcab3b07923ebb5fc9f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin-api/zipball/525f244898f7904908084afa60de7f668aa62b3f",
-                "reference": "525f244898f7904908084afa60de7f668aa62b3f",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin-api/zipball/c1966c8bd17bdecd281fcab3b07923ebb5fc9f12",
+                "reference": "c1966c8bd17bdecd281fcab3b07923ebb5fc9f12",
                 "shasum": ""
             },
             "require": {
@@ -2982,8 +2982,16 @@
                 "larastan/larastan": "^3.0",
                 "laravel/pint": "^1.18",
                 "orchestra/testbench": "^10.0|^11.0",
+                "padosoft/laravel-rebel-ai-guard": "^0.1",
+                "padosoft/laravel-rebel-sessions": "^0.1",
+                "padosoft/laravel-rebel-step-up": "^0.1",
                 "pestphp/pest": "^4.0",
                 "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "suggest": {
+                "padosoft/laravel-rebel-ai-guard": "Anomaly cases + AI security copilot endpoints (anomalies, ai/anomalies/{case}/explain, ai/policies/suggest).",
+                "padosoft/laravel-rebel-sessions": "Device & session trust endpoints (subjects/{subject}/devices & sessions, revoke, logout-everywhere, untrust).",
+                "padosoft/laravel-rebel-step-up": "Adds PSD2/SCA counts to compliance/overview from rebel_step_up_challenges."
             },
             "type": "library",
             "extra": {
@@ -3020,9 +3028,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-admin-api/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-admin-api/tree/v0.1.0"
+                "source": "https://github.com/padosoft/laravel-rebel-admin-api/tree/v0.1.3"
             },
-            "time": "2026-06-03T10:27:45+00:00"
+            "time": "2026-06-03T15:42:38+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-ai-guard",
