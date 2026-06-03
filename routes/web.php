@@ -10,6 +10,8 @@ use Padosoft\Rebel\Core\Audit\AuditEvent;
 use Padosoft\Rebel\Core\Context\SecurityContext;
 use Padosoft\Rebel\Core\Contracts\AuditLogger;
 use Padosoft\Rebel\Core\Contracts\KeyedHasher;
+use Padosoft\Rebel\Core\Identifiers\EmailIdentifier;
+use Padosoft\Rebel\EmailOtp\RebelEmailOtp;
 use Padosoft\Rebel\Recovery\RecoveryCodeManager;
 use Padosoft\Rebel\Sessions\Enums\SessionType;
 use Padosoft\Rebel\Sessions\SessionManager;
@@ -46,11 +48,70 @@ Route::get('/demo/login-as-customer', function () {
     return redirect('/')->with('status', 'Signed in as the demo customer.');
 })->name('demo.login-as-customer');
 
-Route::get('/demo/logout', function () {
+Route::get('/demo/logout', function (Request $request) {
     Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
     return redirect('/')->with('status', 'Signed out.');
 })->name('demo.logout');
+
+/*
+|--------------------------------------------------------------------------
+| Passwordless email-OTP LOGIN (real session, via laravel-rebel-email-otp)
+|--------------------------------------------------------------------------
+| Unlike the package's /account/login reference flow (which only demos the OTP
+| mechanism), this signs the matching user in so you can then use the protected
+| areas (step-up, admin panel) — the passwordless equivalent of the password login.
+*/
+Route::get('/demo/passwordless', fn () => view('demo.passwordless-start'))->name('demo.passwordless');
+
+Route::post('/demo/passwordless/start', function (Request $request, RebelEmailOtp $otp, KeyedHasher $hasher) {
+    $request->validate(['email' => ['required', 'email']]);
+    $email = $request->string('email')->toString();
+    $purpose = 'demo-passwordless-login';
+    $context = SecurityContext::fromRequest($request, $hasher)->withPurpose($purpose);
+
+    $result = $otp->start(EmailIdentifier::from($email), $purpose, $context);
+
+    $request->session()->put('demo_pwl', ['email' => $email, 'challenge_id' => $result->challengeId, 'masked' => $result->maskedIdentifier]);
+
+    return redirect()->route('demo.passwordless.verify');
+})->name('demo.passwordless.start');
+
+Route::get('/demo/passwordless/verify', function (Request $request) {
+    $s = $request->session()->get('demo_pwl');
+
+    return is_array($s) ? view('demo.passwordless-verify', ['masked' => $s['masked'] ?? '']) : redirect()->route('demo.passwordless');
+})->name('demo.passwordless.verify');
+
+Route::post('/demo/passwordless/verify', function (Request $request, RebelEmailOtp $otp, KeyedHasher $hasher) {
+    $request->validate(['code' => ['required', 'string']]);
+    $s = $request->session()->get('demo_pwl');
+    if (! is_array($s)) {
+        return redirect()->route('demo.passwordless');
+    }
+
+    $purpose = 'demo-passwordless-login';
+    $context = SecurityContext::fromRequest($request, $hasher)->withPurpose($purpose);
+    $result = $otp->verify($s['challenge_id'], $request->string('code')->toString(), $context);
+
+    if (! $result->success) {
+        return back()->withErrors(['code' => 'Invalid or expired code — check your Mailtrap inbox.']);
+    }
+
+    $user = User::where('email', $s['email'])->first();
+    $request->session()->forget('demo_pwl');
+
+    if ($user === null) {
+        // Anti-enumeration: the OTP verified, but no demo account exists for that address.
+        return redirect('/')->with('status', 'Code verified, but no demo account exists for that email. Try admin@demo.test or demo.customer@example.com.');
+    }
+
+    Auth::login($user);
+
+    return redirect('/')->with('status', 'Signed in passwordlessly as '.$user->email.'.');
+})->name('demo.passwordless.verify.submit');
 
 /*
 |--------------------------------------------------------------------------

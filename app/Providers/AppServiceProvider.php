@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
         if (class_exists(Fortify::class)) {
             Fortify::loginView(fn () => view('auth.login'));
             Fortify::twoFactorChallengeView(fn () => view('auth.two-factor'));
+            Fortify::requestPasswordResetLinkView(fn () => view('auth.forgot-password'));
+            Fortify::resetPasswordView(fn ($request) => view('auth.reset-password', ['request' => $request]));
         }
     }
 }

@@ -53,7 +53,7 @@
                 <div class="who">Not signed in — sign in to unlock the protected demos (step-up, admin panel).</div>
                 <div class="btns">
                     <a class="primary" href="/login">Sign in (password)</a>
-                    <a href="/account/login">Passwordless OTP</a>
+                    <a href="/demo/passwordless">Passwordless OTP</a>
                 </div>
             @endauth
         </div>
@@ -61,9 +61,9 @@
 
         <h2>Authentication</h2>
         <div class="grid">
-            <a class="card" href="/account/login">
+            <a class="card" href="/demo/passwordless">
                 <h3>Passwordless email-OTP login</h3>
-                <p>core + email-otp — enter your email, receive a real code (Mailtrap), verify.</p>
+                <p>core + email-otp — enter your email, receive a real code (Mailtrap), and get signed in.</p>
             </a>
             <a class="card" href="/login">
                 <h3>Password login (Fortify)</h3>

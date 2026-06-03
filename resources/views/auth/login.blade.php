@@ -39,6 +39,7 @@
 
         <button type="submit">Sign in</button>
 
+        <p class="alt"><a href="/forgot-password">Forgot your password?</a></p>
         <p class="alt">Prefer passwordless? <a href="/account/login">Use email-OTP →</a></p>
     </form>
 </body>
