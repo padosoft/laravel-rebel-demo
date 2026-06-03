@@ -1,0 +1,12 @@
+{
+    "name": "padosoft/laravel-rebel-demo",
+    "description": "Demo / integration application for the padosoft/laravel-rebel-* suite.",
+    "type": "project",
+    "keywords": ["laravel", "authentication", "padosoft", "rebel", "demo"],
+    "homepage": "https://github.com/padosoft/laravel-rebel-demo",
+    "license": "MIT",
+    "authors": [ { "name": "Padosoft", "email": "support@padosoft.com", "homepage": "https://www.padosoft.com" } ],
+    "require": { "php": "^8.3" },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
