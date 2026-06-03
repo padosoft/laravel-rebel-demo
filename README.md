@@ -155,6 +155,23 @@ behind a black box. How the suite compares to **Shopify**'s customer auth and to
 
 ---
 
+## 🔋 Vibe coding with batteries included
+
+This app ships **AI batteries** — so you (and your AI agent) can extend the demo correctly on the
+first try:
+
+- **`CLAUDE.md`** — a concise AI working guide (what the demo is, conventions, how it wires the
+  whole `padosoft/laravel-rebel-*` suite, where the extension points are, Definition of Done). Plain
+  Markdown, so Claude Code, Cursor, Copilot and Codex all read it.
+- **`.claude/skills/`** — invocable skills (at least `rebel-package-dev`) encoding the suite's
+  TDD loop, the **PHPStan-level-max** recipes, the security/telemetry rules, and the release
+  discipline used across the packages this app installs.
+
+Open the repo in your AI editor and just start — the rules, guardrails and extension recipes come
+with it.
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Built by [Padosoft](https://www.padosoft.com).
