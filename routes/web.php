@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Padosoft\Rebel\AiGuard\Detection\AnomalyDetector;
 use Padosoft\Rebel\AiGuard\Models\AnomalyCase;
+use Padosoft\Rebel\Channels\Enums\Channel;
+use Padosoft\Rebel\Channels\Routing\VerificationRouter;
 use Padosoft\Rebel\Core\Audit\AuditEvent;
 use Padosoft\Rebel\Core\Context\SecurityContext;
 use Padosoft\Rebel\Core\Contracts\AuditLogger;
 use Padosoft\Rebel\Core\Contracts\KeyedHasher;
 use Padosoft\Rebel\Core\Identifiers\EmailIdentifier;
+use Padosoft\Rebel\Core\Identifiers\PhoneIdentifier;
 use Padosoft\Rebel\EmailOtp\RebelEmailOtp;
 use Padosoft\Rebel\Recovery\RecoveryCodeManager;
 use Padosoft\Rebel\Sessions\Enums\SessionType;
@@ -174,6 +177,62 @@ Route::middleware(['web', 'auth'])->group(function (): void {
         return redirect()->route('demo.secure-action');
     })->name('demo.stepup.confirm');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Driver / channel try-outs (REAL provider APIs)
+|--------------------------------------------------------------------------
+| One flow per delivery driver we ship. Each sends a REAL verification through
+| the laravel-rebel-channels router, which records the send/verify on the audit
+| trail (channel + provider) so it shows up in the admin panel's Channel
+| Performance & Provider Health. Twilio first; add more drivers the same way.
+*/
+
+Route::get('/demo/twilio', fn () => view('demo.twilio-start', [
+    'phone' => (string) (config('app.twilio_test_phone') ?? env('TWILIO_TEST_PHONE', '')),
+    'configured' => env('TWILIO_ACCOUNT_SID') !== null && env('TWILIO_VERIFY_SERVICE_SID') !== null,
+]))->name('demo.twilio');
+
+Route::post('/demo/twilio/start', function (Request $request, VerificationRouter $router, KeyedHasher $hasher) {
+    $request->validate(['phone' => ['required', 'string']]);
+    $phone = $request->string('phone')->toString();
+    $context = SecurityContext::fromRequest($request, $hasher)->withPurpose('demo-twilio-sms');
+
+    $result = $router->start(PhoneIdentifier::from($phone), Channel::Sms, $context);
+
+    if ($result->failed()) {
+        return back()->withErrors(['phone' => 'Could not send: '.($result->reason ?? 'provider error').'. Check the TWILIO_* values in .env.']);
+    }
+
+    $request->session()->put('demo_twilio', ['phone' => $phone, 'reference' => $result->reference, 'provider' => $result->provider]);
+
+    return redirect()->route('demo.twilio.verify');
+})->name('demo.twilio.start');
+
+Route::get('/demo/twilio/verify', function (Request $request) {
+    $s = $request->session()->get('demo_twilio');
+
+    return is_array($s) ? view('demo.twilio-verify', ['provider' => $s['provider'] ?? 'twilio']) : redirect()->route('demo.twilio');
+})->name('demo.twilio.verify');
+
+Route::post('/demo/twilio/verify', function (Request $request, VerificationRouter $router, KeyedHasher $hasher) {
+    $request->validate(['code' => ['required', 'string']]);
+    $s = $request->session()->get('demo_twilio');
+    if (! is_array($s) || ! is_string($s['reference'] ?? null)) {
+        return redirect()->route('demo.twilio');
+    }
+
+    $context = SecurityContext::fromRequest($request, $hasher)->withPurpose('demo-twilio-sms');
+    $result = $router->check(PhoneIdentifier::from($s['phone']), $request->string('code')->toString(), $s['reference'], $context);
+
+    if (! $result->approved()) {
+        return back()->withErrors(['code' => 'Invalid or expired code.']);
+    }
+
+    $request->session()->forget('demo_twilio');
+
+    return view('demo.twilio-done', ['provider' => $s['provider'] ?? 'twilio']);
+})->name('demo.twilio.verify.submit');
 
 /*
 |--------------------------------------------------------------------------

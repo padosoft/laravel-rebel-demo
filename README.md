@@ -66,6 +66,20 @@ center — tenant-aware and **fail-closed** (you must pass the `rebel-admin` Gat
 
 ---
 
+## Screenshots
+
+The demo end to end — the landing page, both sign-in paths, the email-OTP step-up, and the live
+web admin panel.
+
+| | |
+|---|---|
+| **Demo home** — every capability, with auth state<br><img src="resources/screenshoots/demo-admin-home.png" width="420"> | **Sign in (Fortify password)**<br><img src="resources/screenshoots/demo-admin-signin.png" width="420"> |
+| **Passwordless email-OTP login**<br><img src="resources/screenshoots/demo-admin-password-otp.png" width="420"> | **Step-up: a sensitive action is guarded**<br><img src="resources/screenshoots/demo-stepup.png" width="420"> |
+| **Step-up: email-OTP challenge**<br><img src="resources/screenshoots/demo-stepup-emailOTP.png" width="420"> | **Step-up: confirmed → action unlocked**<br><img src="resources/screenshoots/demo-stepup-emailOTP-confirmed.png" width="420"> |
+| **Web Admin Panel — Security Overview**<br><img src="resources/screenshoots/Laravel-Rebel-Web-Panel-dasboard-dark.png" width="420"> | **Web Admin Panel — Audit Explorer (live events)**<br><img src="resources/screenshoots/demo-admin-audit-explorer.png" width="420"> |
+
+---
+
 ## Run it in 3 minutes
 
 ```bash
@@ -87,9 +101,33 @@ php artisan serve
 
 Open <http://127.0.0.1:8000> and click through the demos.
 
-> Set `MAIL_MAILER=log` (as in `.env.example`) to read the OTP code from
-> `storage/logs/laravel.log` without a real mailbox. The seeder creates
-> `demo.customer@example.com` and an admin `admin@demo.test` (password `password`).
+### Start clean (recommended if anything looks off)
+
+If you pulled updates, added packages, or see **404s / stale routes / a login you can't
+get past**, you almost certainly have a stale cache or an un-seeded DB. Reset to a known-good
+state and **restart the server**:
+
+```bash
+cd laravel-rebel-demo
+
+composer update                  # pull the latest rebel-* releases
+php artisan optimize:clear       # clear cached routes/config/views (the usual cause of 404s)
+php artisan migrate:fresh --seed # recreate the schema + seed users and risk rules
+php artisan vendor:publish --provider="Padosoft\Rebel\Admin\RebelAdminServiceProvider" --tag=rebel-admin-assets --force
+
+php artisan serve                # http://127.0.0.1:8000
+```
+
+> **Always restart `php artisan serve` after changing routes/packages** — a long-running dev
+> server keeps serving the old route table.
+
+### Credentials & email
+
+- Seeded users: **`admin@demo.test`** (admin) and **`demo.customer@example.com`** — both with
+  password **`password`**.
+- Email goes to **Mailtrap** when `MAIL_MAILER=smtp` (set the `MAIL_*` values in `.env`); the
+  OTP, step-up and password-reset messages all land in your Mailtrap inbox. Prefer no mailbox?
+  set `MAIL_MAILER=log` and read the code from `storage/logs/laravel.log`.
 
 ---
 

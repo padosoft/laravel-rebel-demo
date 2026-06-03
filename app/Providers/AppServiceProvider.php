@@ -2,9 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Padosoft\Rebel\Core\Context\DeviceContext;
+use Padosoft\Rebel\Core\Contracts\DeviceTrust;
+use Padosoft\Rebel\Core\Contracts\KeyedHasher;
+use Padosoft\Rebel\Sessions\Enums\SessionType;
+use Padosoft\Rebel\Sessions\SessionManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,5 +45,25 @@ class AppServiceProvider extends ServiceProvider
             Fortify::requestPasswordResetLinkView(fn () => view('auth.forgot-password'));
             Fortify::resetPasswordView(fn ($request) => view('auth.reset-password', ['request' => $request]));
         }
+
+        // On every login, register a real device + session in the Rebel registries
+        // (laravel-rebel-sessions) so the admin panel's Device & Session Trust section
+        // shows real data instead of being empty. Best-effort for the demo.
+        Event::listen(Login::class, function (Login $event): void {
+            if (! $event->user instanceof User) {
+                return;
+            }
+            try {
+                $request = request();
+                $hasher = app(KeyedHasher::class);
+                $fingerprint = $hasher->hash(($request->ip() ?? 'cli').'|'.($request->userAgent() ?? 'unknown'));
+                $deviceId = substr(hash('sha256', $fingerprint->hash), 0, 16);
+
+                app(SessionManager::class)->start($event->user, SessionType::Session, $deviceId);
+                app(DeviceTrust::class)->trust($event->user, new DeviceContext($deviceId, $fingerprint->hash), 30);
+            } catch (\Throwable) {
+                // demo best-effort — never block login if the registry isn't available
+            }
+        });
     }
 }

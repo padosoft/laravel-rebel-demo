@@ -71,6 +71,19 @@
             </a>
         </div>
 
+        <h2>Delivery drivers <span class="pill">real provider APIs</span></h2>
+        <div class="grid">
+            <a class="card" href="/demo/twilio">
+                <h3>Twilio SMS OTP</h3>
+                <p>channels + channel-twilio — send a <strong>real</strong> SMS verification; the send + verify
+                    are recorded on the audit trail and show up in the panel's Channel Performance.</p>
+            </a>
+            <a class="card" style="opacity:.5; pointer-events:none">
+                <h3>More drivers — coming</h3>
+                <p>Vonage, Bird, WhatsApp, voice… each plugs into the same channels router and tracks the same way.</p>
+            </a>
+        </div>
+
         <h2>Protected by step-up @guest <span class="pill">sign in first</span> @endguest</h2>
         <div class="grid">
             <a class="card @guest locked @endguest" href="/demo/secure-action">
