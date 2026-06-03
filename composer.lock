@@ -2891,16 +2891,16 @@
         },
         {
             "name": "padosoft/laravel-rebel-admin",
-            "version": "v0.1.5",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-admin.git",
-                "reference": "fd8579bd44c91f58cbc9ee63a94f56187ab37267"
+                "reference": "4bbed3f83c65474dc3a853db20dab39b4f81f68b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin/zipball/fd8579bd44c91f58cbc9ee63a94f56187ab37267",
-                "reference": "fd8579bd44c91f58cbc9ee63a94f56187ab37267",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin/zipball/4bbed3f83c65474dc3a853db20dab39b4f81f68b",
+                "reference": "4bbed3f83c65474dc3a853db20dab39b4f81f68b",
                 "shasum": ""
             },
             "require": {
@@ -2953,22 +2953,22 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-admin/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-admin/tree/v0.1.5"
+                "source": "https://github.com/padosoft/laravel-rebel-admin/tree/v0.1.6"
             },
-            "time": "2026-06-03T18:16:29+00:00"
+            "time": "2026-06-03T20:06:03+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-admin-api",
-            "version": "v0.1.5",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-admin-api.git",
-                "reference": "794aaa0cd82ee6e6b73fa28e360ab2294a9e4084"
+                "reference": "f1b3fb3a6aa73a2774395fb4a02144cfa55766a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin-api/zipball/794aaa0cd82ee6e6b73fa28e360ab2294a9e4084",
-                "reference": "794aaa0cd82ee6e6b73fa28e360ab2294a9e4084",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin-api/zipball/f1b3fb3a6aa73a2774395fb4a02144cfa55766a3",
+                "reference": "f1b3fb3a6aa73a2774395fb4a02144cfa55766a3",
                 "shasum": ""
             },
             "require": {
@@ -3028,22 +3028,22 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-admin-api/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-admin-api/tree/v0.1.5"
+                "source": "https://github.com/padosoft/laravel-rebel-admin-api/tree/v0.1.6"
             },
-            "time": "2026-06-03T18:10:27+00:00"
+            "time": "2026-06-03T20:05:38+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-ai-guard",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-ai-guard.git",
-                "reference": "647a87423c10e8735fa8c8df4bb5d5bcc4704cc2"
+                "reference": "4a008270ea3ff4e31fb8ba3ba7baade67bd68088"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-ai-guard/zipball/647a87423c10e8735fa8c8df4bb5d5bcc4704cc2",
-                "reference": "647a87423c10e8735fa8c8df4bb5d5bcc4704cc2",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-ai-guard/zipball/4a008270ea3ff4e31fb8ba3ba7baade67bd68088",
+                "reference": "4a008270ea3ff4e31fb8ba3ba7baade67bd68088",
                 "shasum": ""
             },
             "require": {
@@ -3095,9 +3095,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-ai-guard/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-ai-guard/tree/v0.1.1"
+                "source": "https://github.com/padosoft/laravel-rebel-ai-guard/tree/v0.1.2"
             },
-            "time": "2026-06-03T17:59:12+00:00"
+            "time": "2026-06-03T19:35:31+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-auth",
@@ -3266,16 +3266,16 @@
         },
         {
             "name": "padosoft/laravel-rebel-channel-twilio",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-channel-twilio.git",
-                "reference": "2e9f11cbd24b7133f476647bf15c51f5d57e5206"
+                "reference": "2031380b7fdc2ec212e4f89f5086e368bb5d23bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channel-twilio/zipball/2e9f11cbd24b7133f476647bf15c51f5d57e5206",
-                "reference": "2e9f11cbd24b7133f476647bf15c51f5d57e5206",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channel-twilio/zipball/2031380b7fdc2ec212e4f89f5086e368bb5d23bd",
+                "reference": "2031380b7fdc2ec212e4f89f5086e368bb5d23bd",
                 "shasum": ""
             },
             "require": {
@@ -3332,9 +3332,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-channel-twilio/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-channel-twilio/tree/v0.1.0"
+                "source": "https://github.com/padosoft/laravel-rebel-channel-twilio/tree/v0.1.1"
             },
-            "time": "2026-06-03T09:58:37+00:00"
+            "time": "2026-06-03T19:34:45+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-channels",
@@ -3405,16 +3405,16 @@
         },
         {
             "name": "padosoft/laravel-rebel-core",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-core.git",
-                "reference": "a89c09be4e5603104ad4103f9c75b9d488cd4fbc"
+                "reference": "ab9fe2db982e7bde634699856467731bd0e588e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-core/zipball/a89c09be4e5603104ad4103f9c75b9d488cd4fbc",
-                "reference": "a89c09be4e5603104ad4103f9c75b9d488cd4fbc",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-core/zipball/ab9fe2db982e7bde634699856467731bd0e588e7",
+                "reference": "ab9fe2db982e7bde634699856467731bd0e588e7",
                 "shasum": ""
             },
             "require": {
@@ -3455,7 +3455,7 @@
                     "homepage": "https://www.padosoft.com"
                 }
             ],
-            "description": "Core primitives, value objects e contratti per Laravel Rebel: il control plane di autenticazione enterprise (assurance AAL/AMR, security context, audit, token Sanctum, rate-limiting). Porta d'ingresso dell'ecosistema padosoft/laravel-rebel-*.",
+            "description": "Core primitives, value objects and contracts for Laravel Rebel: the enterprise authentication control plane (AAL/AMR assurance, security context, audit, Sanctum tokens, rate-limiting). The entry point of the padosoft/laravel-rebel-* ecosystem.",
             "homepage": "https://github.com/padosoft/laravel-rebel-core",
             "keywords": [
                 "Authentication",
@@ -3471,9 +3471,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-core/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-core/tree/v0.1.0"
+                "source": "https://github.com/padosoft/laravel-rebel-core/tree/v0.1.1"
             },
-            "time": "2026-06-02T23:27:35+00:00"
+            "time": "2026-06-03T19:34:24+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-email-otp",
