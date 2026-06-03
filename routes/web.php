@@ -1,13 +1,20 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Padosoft\Rebel\AiGuard\Detection\AnomalyDetector;
+use Padosoft\Rebel\AiGuard\Models\AnomalyCase;
+use Padosoft\Rebel\Core\Audit\AuditEvent;
+use Padosoft\Rebel\Core\Context\SecurityContext;
+use Padosoft\Rebel\Core\Contracts\AuditLogger;
+use Padosoft\Rebel\Core\Contracts\KeyedHasher;
 use Padosoft\Rebel\Recovery\RecoveryCodeManager;
 use Padosoft\Rebel\Sessions\Enums\SessionType;
 use Padosoft\Rebel\Sessions\SessionManager;
 use Padosoft\Rebel\StepUp\RebelStepUp;
+use Padosoft\Rebel\StepUp\StepUpContext;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,39 +27,107 @@ use Padosoft\Rebel\StepUp\RebelStepUp;
 
 Route::view('/', 'demo.home')->name('demo.home');
 
-// Fortify redirects here after a successful password login; send users to the
-// demo landing page (the app has no separate dashboard).
+// Fortify redirects here after a successful password login.
 Route::get('/home', fn () => redirect('/'))->name('home');
 
 /**
  * Demo helper: authenticate as the seeded admin so the fail-closed admin panel
- * and admin API can be viewed. A real app authenticates via the Rebel flows.
+ * and admin API can be viewed.
  */
 Route::get('/demo/login-as-admin', function () {
-    $admin = User::where('email', 'admin@demo.test')->firstOrFail();
-    Auth::login($admin);
+    Auth::login(User::where('email', 'admin@demo.test')->firstOrFail());
 
     return redirect('/admin/rebel');
 })->name('demo.login-as-admin');
 
+Route::get('/demo/login-as-customer', function () {
+    Auth::login(User::where('email', 'demo.customer@example.com')->firstOrFail());
+
+    return redirect('/')->with('status', 'Signed in as the demo customer.');
+})->name('demo.login-as-customer');
+
 Route::get('/demo/logout', function () {
     Auth::logout();
 
-    return redirect('/');
+    return redirect('/')->with('status', 'Signed out.');
 })->name('demo.logout');
 
-/**
- * Recovery codes (laravel-rebel-recovery): generate a one-time-shown set for a
- * user, then prove a code verifies once and is then burned (single-use).
- */
+/*
+|--------------------------------------------------------------------------
+| Step-up (laravel-rebel-step-up) — interactive
+|--------------------------------------------------------------------------
+| A "sensitive action" protected by the step-up middleware. If you have no
+| valid confirmation, the middleware redirects to the challenge screen, which
+| issues an email-OTP step-up (delivered to Mailtrap) you must confirm.
+*/
+
+Route::middleware(['web', 'auth'])->group(function (): void {
+    // The sensitive action. Reaching it proves a valid step-up confirmation exists.
+    Route::get('/demo/secure-action', fn () => view('demo.secure-action'))
+        ->middleware('rebel.stepup:change-email')
+        ->name('demo.secure-action');
+
+    // The step-up challenge screen (config rebel-step-up.redirect_route points here).
+    Route::get('/demo/stepup/{purpose}', function (Request $request, RebelStepUp $stepUp, KeyedHasher $hasher, string $purpose) {
+        $context = new StepUpContext(
+            $request->user(),
+            $purpose,
+            SecurityContext::fromRequest($request, $hasher)->withPurpose($purpose),
+        );
+
+        $result = $stepUp->start($context); // email-OTP step-up -> sends a code to Mailtrap
+
+        $request->session()->put('demo_stepup', [
+            'purpose' => $purpose,
+            'challenge_id' => $result->challengeId,
+        ]);
+
+        return view('demo.stepup', [
+            'purpose' => $purpose,
+            'driver' => $result->driver,
+        ]);
+    })->name('demo.stepup.show');
+
+    Route::post('/demo/stepup/{purpose}', function (Request $request, RebelStepUp $stepUp, KeyedHasher $hasher, string $purpose) {
+        $request->validate(['code' => ['required', 'string']]);
+        $session = $request->session()->get('demo_stepup');
+
+        if (! is_array($session) || ($session['purpose'] ?? null) !== $purpose) {
+            return redirect()->route('demo.stepup.show', $purpose);
+        }
+
+        $context = new StepUpContext(
+            $request->user(),
+            $purpose,
+            SecurityContext::fromRequest($request, $hasher)->withPurpose($purpose),
+        );
+
+        $result = $stepUp->confirm($session['challenge_id'], $request->string('code')->toString(), $context);
+
+        if (! $result->success) {
+            return back()->withErrors(['code' => 'Invalid or expired code — check your Mailtrap inbox.']);
+        }
+
+        $request->session()->forget('demo_stepup');
+
+        return redirect()->route('demo.secure-action');
+    })->name('demo.stepup.confirm');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Back-end capability demos (JSON)
+|--------------------------------------------------------------------------
+*/
+
+/** Recovery codes (laravel-rebel-recovery): single-use, HMAC-hashed backup codes. */
 Route::get('/demo/recovery', function (RecoveryCodeManager $manager) {
     $user = User::where('email', 'demo.customer@example.com')->firstOrFail();
 
     $codes = $manager->generate($user, 10);
     $first = $codes[0] ?? '';
-
-    $firstOk = $first !== '' && $manager->verify($user, $first);   // expected: true
-    $firstReuse = $first !== '' && $manager->verify($user, $first); // expected: false (burned)
+    $firstOk = $first !== '' && $manager->verify($user, $first);
+    $firstReuse = $first !== '' && $manager->verify($user, $first);
 
     return response()->json([
         'package' => 'laravel-rebel-recovery',
@@ -64,16 +139,13 @@ Route::get('/demo/recovery', function (RecoveryCodeManager $manager) {
     ], options: JSON_PRETTY_PRINT);
 })->name('demo.recovery');
 
-/**
- * Sessions (laravel-rebel-sessions): issue a refresh-token session, rotate it,
- * then prove that presenting the OLD (already-rotated) token is flagged as reuse.
- */
+/** Sessions (laravel-rebel-sessions): refresh rotation + reuse detection. */
 Route::get('/demo/sessions', function (SessionManager $sessions) {
     $user = User::where('email', 'demo.customer@example.com')->firstOrFail();
 
     $refresh = $sessions->start($user, SessionType::Refresh, 'demo-device');
     $rotated = $sessions->rotateRefresh($refresh->id, $user);
-    $oldReused = $sessions->isRefreshReused($refresh->id); // expected: true after rotation
+    $oldReused = $sessions->isRefreshReused($refresh->id);
 
     return response()->json([
         'package' => 'laravel-rebel-sessions',
@@ -84,38 +156,52 @@ Route::get('/demo/sessions', function (SessionManager $sessions) {
     ], options: JSON_PRETTY_PRINT);
 })->name('demo.sessions');
 
-/**
- * Step-up (laravel-rebel-step-up): read the policy for a sensitive action. This
- * proves the purpose registry + assurance + PSD2/SCA dynamic-linking config is live.
- */
-Route::get('/demo/stepup', function (RebelStepUp $stepUp) {
+/** Step-up policy (laravel-rebel-step-up): inspect a purpose's policy + SCA. */
+Route::get('/demo/stepup-policy', function (RebelStepUp $stepUp) {
     $policy = $stepUp->policy('checkout-credit-order');
 
     return response()->json([
         'package' => 'laravel-rebel-step-up',
         'purpose' => $policy->purpose,
         'required_assurance' => $policy->requiredAssurance->value,
-        'require_phishing_resistant' => $policy->requirePhishingResistant,
         'drivers' => $policy->drivers,
         'always_require' => $policy->alwaysRequire,
-        'sca_dynamic_linking' => $policy->scaDynamicLinking, // PSD2 binding amount+payee
+        'sca_dynamic_linking' => $policy->scaDynamicLinking,
     ], options: JSON_PRETTY_PRINT);
-})->name('demo.stepup');
+})->name('demo.stepup-policy');
 
 /**
- * AI guard (laravel-rebel-ai-guard): run the deterministic anomaly detector over
- * the recent audit window and report how many anomaly cases it raised.
+ * AI guard (laravel-rebel-ai-guard): SIMULATE an OTP-bombing attack (12 failed
+ * verifications against one identifier), then run the deterministic detector and
+ * return the anomaly case it opens. Re-runnable (the case is de-duplicated).
  */
-Route::get('/demo/ai-guard', function (AnomalyDetector $detector) {
-    $to = now();
-    $from = $to->copy()->subDay();
+Route::get('/demo/ai-guard', function (Request $request, AuditLogger $audit, KeyedHasher $hasher, AnomalyDetector $detector) {
+    $identifierHmac = $hasher->hash('attacker@example.com|email')->hash;
 
-    $cases = $detector->detect($from->toImmutable(), $to->toImmutable());
+    // Forge a burst of failed email-OTP verifications for the same identifier.
+    for ($i = 0; $i < 12; $i++) {
+        $audit->record(new AuditEvent(
+            type: 'email_otp.failed',
+            identifierHmac: $identifierHmac,
+            keyVersion: 1,
+        ));
+    }
+
+    $opened = $detector->detect(now()->subDay()->toImmutable(), now()->addMinute()->toImmutable());
+
+    $case = AnomalyCase::query()->withoutGlobalScopes()
+        ->where('dedupe_key', 'otp_bombing:'.$identifierHmac)->first();
 
     return response()->json([
         'package' => 'laravel-rebel-ai-guard',
-        'window_from' => $from->toIso8601String(),
-        'window_to' => $to->toIso8601String(),
-        'anomaly_cases_raised' => $cases,
+        'simulated' => '12x email_otp.failed for one identifier',
+        'cases_opened_or_updated' => $opened,
+        'case' => $case === null ? null : [
+            'type' => $case->type->value,
+            'severity' => $case->severity->value,
+            'status' => $case->status->value,
+            'events_count' => $case->events_count,
+            'signals' => $case->signals,
+        ],
     ], options: JSON_PRETTY_PRINT);
 })->name('demo.ai-guard');

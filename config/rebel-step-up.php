@@ -14,7 +14,7 @@ return [
     'max_attempts' => (int) env('REBEL_STEPUP_MAX_ATTEMPTS', 5),
 
     // Route name della schermata di step-up (web). Null → 423 nudo.
-    'redirect_route' => env('REBEL_STEPUP_REDIRECT_ROUTE'),
+    'redirect_route' => env('REBEL_STEPUP_REDIRECT_ROUTE', 'demo.stepup.show'),
 
     /*
     |--------------------------------------------------------------------------
