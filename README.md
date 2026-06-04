@@ -62,6 +62,14 @@ Each capability has a clickable demo on the landing page (`/`) so you can exerci
 | **Laragear TOTP step-up driver** | `bridge-laragear-2fa` + `laragear/two-factor` | **Live** — driver registered (AAL2 TOTP); enrollment (QR scan) not wired in this demo; see bridge-bug note |
 | **Otpz email OTP step-up driver** | `bridge-otpz` + `benbjurstrom/otpz` | **Live** — driver registered + exercised end-to-end (sends email OTP via Mailtrap, verified in the browser) |
 
+The hub renders the **live registries** — every step-up driver, delivery channel and verification
+provider actually registered in this boot — plus the Turnstile bot-protection check and the otpz
+bridge OTP form:
+
+<p align="center">
+  <img src="resources/screenshoots/demo-admin-bridge-and-channles.png" alt="Extras hub: live step-up driver / delivery channel / verification provider registries, bot-protection and otpz step-up" width="92%">
+</p>
+
 ### The Audit Explorer, live
 
 The admin panel reads the unified audit log written by *every* package. After clicking through
@@ -94,6 +102,7 @@ web admin panel.
 | **Passwordless email-OTP login**<br><img src="resources/screenshoots/demo-admin-password-otp.png" width="420"> | **Step-up: a sensitive action is guarded**<br><img src="resources/screenshoots/demo-stepup.png" width="420"> |
 | **Step-up: email-OTP challenge**<br><img src="resources/screenshoots/demo-stepup-emailOTP.png" width="420"> | **Step-up: confirmed → action unlocked**<br><img src="resources/screenshoots/demo-stepup-emailOTP-confirmed.png" width="420"> |
 | **Web Admin Panel — Security Overview**<br><img src="resources/screenshoots/Laravel-Rebel-Web-Panel-dasboard-dark.png" width="420"> | **Web Admin Panel — Audit Explorer (live events)**<br><img src="resources/screenshoots/demo-admin-audit-explorer.png" width="420"> |
+| **Extras hub — 9 new packages (live registries)**<br><img src="resources/screenshoots/demo-admin-bridge-and-channles.png" width="420"> | **Demo home — every capability**<br><img src="resources/screenshoots/demo-admin-home.png" width="420"> |
 
 ---
 
