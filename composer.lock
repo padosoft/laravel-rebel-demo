@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9472ac8ce6c133460dece52a8f66e96",
+    "content-hash": "dd9ecef857d6fe052505562048ed594a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3623,16 +3623,16 @@
         },
         {
             "name": "padosoft/laravel-rebel-bridge-laragear-2fa",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa.git",
-                "reference": "8ee02a6ffe0a446acdfacb5c62289b904722d57d"
+                "reference": "73fa0ef2609d80a63494512be99b25db4a9a140e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bridge-laragear-2fa/zipball/8ee02a6ffe0a446acdfacb5c62289b904722d57d",
-                "reference": "8ee02a6ffe0a446acdfacb5c62289b904722d57d",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bridge-laragear-2fa/zipball/73fa0ef2609d80a63494512be99b25db4a9a140e",
+                "reference": "73fa0ef2609d80a63494512be99b25db4a9a140e",
                 "shasum": ""
             },
             "require": {
@@ -3693,9 +3693,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa/tree/v0.1.0"
+                "source": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa/tree/v0.1.1"
             },
-            "time": "2026-06-04T01:54:49+00:00"
+            "time": "2026-06-04T04:35:06+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-bridge-otpz",
