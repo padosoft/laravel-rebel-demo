@@ -24,7 +24,9 @@ Every package in the suite is installed and active in one Laravel app, sharing o
 one session and one audit trail:
 
 `core` · `email-otp` · `step-up` · `bridge-fortify` · `channels` · `channel-twilio` ·
-`admin-api` · `admin` · `sessions` · `recovery` · `ai-guard`
+`admin-api` · `admin` · `sessions` · `recovery` · `ai-guard` ·
+`bot-protection` · `channel-vonage` · `channel-bird` · `channel-telegram` · `channel-discord` ·
+`bridge-passkeys` · `bridge-spatie-otp` · `bridge-laragear-2fa` · `bridge-otpz`
 
 Each capability has a clickable demo on the landing page (`/`) so you can exercise it yourself.
 
@@ -40,10 +42,25 @@ Each capability has a clickable demo on the landing page (`/`) so you can exerci
 | **Sessions & refresh rotation** (`/demo/sessions`) | sessions | a refresh token rotates; presenting the **old token is flagged as reuse** (theft signal) |
 | **Step-up policy** (`/demo/stepup`) | step-up | the `checkout-credit-order` purpose loads with its assurance + **PSD2/SCA dynamic linking** on |
 | **AI anomaly detection** (`/demo/ai-guard`) | ai-guard | the deterministic detector runs over the live audit window and reports cases raised |
+| **9 extras hub** (`/demo/extras`) | bot-protection, channel-vonage/bird/telegram/discord, bridge-passkeys/spatie-otp/laragear-2fa/otpz | live DriverRegistry dump, DeliveryChannelRegistry, ProviderRegistry; Turnstile test-key form (passes live + offline); otpz bridge OTP email end-to-end |
 
 > `channels` + `channel-twilio` boot and register in this app; the Twilio provider is verified
 > against the **real Twilio Verify API** by its own opt-in live test suite (it sends a real SMS,
 > so it is intentionally not fired on every demo run).
+
+### Extras hub — 9 new packages (`/demo/extras`)
+
+| Capability | Package | Live vs configure-to-enable |
+|---|---|---|
+| **Bot-protection (Turnstile)** | `bot-protection` | **Live** — Cloudflare official test keys (sitekey `1x00000000000000000000AA`) always pass; `bot.check.passed` recorded in audit |
+| **Vonage SMS/Voice channel** | `channel-vonage` | Configure-to-enable: set `VONAGE_API_KEY` + `VONAGE_API_SECRET` |
+| **Bird SMS channel** | `channel-bird` | Configure-to-enable: set `BIRD_ACCESS_KEY` |
+| **Telegram delivery channel** | `channel-telegram` | Configure-to-enable: set `TELEGRAM_BOT_TOKEN` |
+| **Discord delivery channel** | `channel-discord` | Configure-to-enable: set `DISCORD_WEBHOOK_URL` |
+| **Passkeys step-up driver** | `bridge-passkeys` + `spatie/laravel-passkeys` | **Live** — driver registered (AAL2 phishing-resistant); full enrollment needs a real WebAuthn device |
+| **Spatie OTP step-up driver** | `bridge-spatie-otp` + `spatie/laravel-one-time-passwords` | **Live** — driver registered + exercised via the bridge OTP form (sends OTP email to Mailtrap) |
+| **Laragear TOTP step-up driver** | `bridge-laragear-2fa` + `laragear/two-factor` | **Live** — driver registered (AAL2 TOTP); enrollment (QR scan) not wired in this demo; see bridge-bug note |
+| **Otpz email OTP step-up driver** | `bridge-otpz` + `benbjurstrom/otpz` | **Live** — driver registered + exercised end-to-end (sends email OTP via Mailtrap, verified in the browser) |
 
 ### The Audit Explorer, live
 
@@ -148,6 +165,10 @@ behind a black box. How the suite compares to **Shopify**'s customer auth and to
 | Anomaly detection + advisory AI | ✅ | ➖ | ❌ | ❌ |
 | **Self-hosted, you own the data** | ✅ | ❌ | ✅ | ✅ |
 | Multi-tenant for *your* app | ✅ | ❌ | ❌ | ❌ |
+| **Bot-protection (Turnstile/reCAPTCHA/hCaptcha)** | ✅ | ➖ (hosted) | ❌ | ❌ |
+| **Passkey / WebAuthn step-up** | ✅ | ➖ | ➖ | ❌ |
+| **TOTP 2FA step-up (laragear, spatie, otpz)** | ✅ | ❌ | ➖ | ❌ |
+| **Multi-channel delivery (SMS, Telegram, Discord, Voice)** | ✅ | ❌ | ❌ | ❌ |
 
 > ✅ built-in · ➖ partial / hosted-only / opaque · ❌ not available. Shopify is a great hosted
 > product, but it's a closed black box you can't self-host, extend, audit or run multi-tenant.

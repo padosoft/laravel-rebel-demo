@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc2cad51ad67738890d8c09ebfcdb000",
+    "content-hash": "dd9ecef857d6fe052505562048ed594a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -60,6 +60,85 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/v3.1.1"
             },
             "time": "2026-04-05T21:06:35+00:00"
+        },
+        {
+            "name": "benbjurstrom/otpz",
+            "version": "v0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/benbjurstrom/otpz.git",
+                "reference": "a114cef8f611f31ec0e86b8c018b26abac79e06d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/benbjurstrom/otpz/zipball/a114cef8f611f31ec0e86b8c018b26abac79e06d",
+                "reference": "a114cef8f611f31ec0e86b8c018b26abac79e06d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0||^11.0||^12.0||^13.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9.13||^3.0",
+                "laravel/pint": "1.29",
+                "nunomaduro/collision": "^7.10.0||^8.5.0",
+                "orchestra/testbench": "^8.22.0||^9.10.0||^10.0||^11.0",
+                "pestphp/pest": "^2.36||^3.0||^4.0",
+                "pestphp/pest-plugin-arch": "^2.7||^3.0||^4.0",
+                "pestphp/pest-plugin-laravel": "^2.4||^3.0||^4.0",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^1.12.12||^2.0",
+                "phpstan/phpstan-deprecation-rules": "^1.2.1||^2.0",
+                "phpstan/phpstan-phpunit": "^1.4.1||^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Otpz": "BenBjurstrom\\Otpz\\Facades\\Otpz"
+                    },
+                    "providers": [
+                        "BenBjurstrom\\Otpz\\OtpzServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BenBjurstrom\\Otpz\\": "src/",
+                    "BenBjurstrom\\Otpz\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Bjurstrom",
+                    "email": "benbjurstrom@users.noreply.github.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "First Factor One-Time Passwords for Laravel (Passwordless OTP Login)",
+            "homepage": "https://github.com/benbjurstrom/otpz",
+            "keywords": [
+                "Ben Bjurstrom",
+                "laravel",
+                "otpz"
+            ],
+            "support": {
+                "issues": "https://github.com/benbjurstrom/otpz/issues",
+                "source": "https://github.com/benbjurstrom/otpz/tree/v0.7.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/benbjurstrom",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-15T14:27:43+00:00"
         },
         {
             "name": "brick/math",
@@ -1210,6 +1289,213 @@
                 }
             ],
             "time": "2026-05-23T22:00:21+00:00"
+        },
+        {
+            "name": "laragear/meta",
+            "version": "v5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/Meta.git",
+                "reference": "aab3973e77dc9a04d431500eb75953bbe75c590b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/Meta/zipball/aab3973e77dc9a04d431500eb75953bbe75c590b",
+                "reference": "aab3973e77dc9a04d431500eb75953bbe75c590b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "12.*|13.*",
+                "illuminate/filesystem": "12.*|13.*",
+                "illuminate/http": "12.*|13.*",
+                "illuminate/support": "12.*|13.*"
+            },
+            "require-dev": {
+                "laragear/meta-testing": "4.*",
+                "orchestra/testbench": "10.*|11.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\Meta\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "A Laravel Package helper for Laravel Packages",
+            "keywords": [
+                "laravel",
+                "package"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/Meta/issues",
+                "source": "https://github.com/Laragear/Meta"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2026-03-18T01:21:41+00:00"
+        },
+        {
+            "name": "laragear/meta-model",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/MetaModel.git",
+                "reference": "5f6f15e390c934cb10068117555242c2d29e9caa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/MetaModel/zipball/5f6f15e390c934cb10068117555242c2d29e9caa",
+                "reference": "5f6f15e390c934cb10068117555242c2d29e9caa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "12.*|13.*",
+                "illuminate/contracts": "12.*|13.*",
+                "illuminate/database": "12.*|13.*",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "phpunit/phpunit": "12.*|13.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\MetaModel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Let other developers customize your package model and migrations",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/MetaModel/issues",
+                "source": "https://github.com/Laragear/MetaModel"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2026-03-04T16:50:11+00:00"
+        },
+        {
+            "name": "laragear/two-factor",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/TwoFactor.git",
+                "reference": "8c3486c55d99a28b5ad4b4d02806c9ea14bf9fd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/TwoFactor/zipball/8c3486c55d99a28b5ad4b4d02806c9ea14bf9fd6",
+                "reference": "8c3486c55d99a28b5ad4b4d02806c9ea14bf9fd6",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "3.*",
+                "ext-json": "*",
+                "illuminate/auth": "12.*|13.*",
+                "illuminate/config": "12.*|13.*",
+                "illuminate/database": "12.*|13.*",
+                "illuminate/http": "12.*|13.*",
+                "illuminate/support": "12.*|13.*",
+                "illuminate/validation": "12.*|13.*",
+                "laragear/meta": "5.*",
+                "laragear/meta-model": "3.*",
+                "paragonie/constant_time_encoding": "3.*",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "laragear/meta-testing": "4.*",
+                "orchestra/testbench": "10.*|11.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\TwoFactor\\TwoFactorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\TwoFactor\\": "src",
+                    "Database\\Factories\\Laragear\\TwoFactor\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "darkghosthunter@gmail.com",
+                    "homepage": "https://patreon.com/packagesforlaravel"
+                }
+            ],
+            "description": "On-premises 2FA Authentication for out-of-the-box.",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "laravel",
+                "two-factor"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/TwoFactor/issues",
+                "source": "https://github.com/Laragear/TwoFactor"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2026-03-04T20:18:04+00:00"
         },
         {
             "name": "laravel/fortify",
@@ -2959,16 +3245,16 @@
         },
         {
             "name": "padosoft/laravel-rebel-admin-api",
-            "version": "v0.1.6",
+            "version": "v0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padosoft/laravel-rebel-admin-api.git",
-                "reference": "f1b3fb3a6aa73a2774395fb4a02144cfa55766a3"
+                "reference": "ccdd4080aefb354d3fc4fa5d8dd468026f10a149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin-api/zipball/f1b3fb3a6aa73a2774395fb4a02144cfa55766a3",
-                "reference": "f1b3fb3a6aa73a2774395fb4a02144cfa55766a3",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-admin-api/zipball/ccdd4080aefb354d3fc4fa5d8dd468026f10a149",
+                "reference": "ccdd4080aefb354d3fc4fa5d8dd468026f10a149",
                 "shasum": ""
             },
             "require": {
@@ -3028,9 +3314,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-admin-api/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-admin-api/tree/v0.1.6"
+                "source": "https://github.com/padosoft/laravel-rebel-admin-api/tree/v0.1.7"
             },
-            "time": "2026-06-03T20:05:38+00:00"
+            "time": "2026-06-04T02:19:57+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-ai-guard",
@@ -3188,6 +3474,77 @@
             "time": "2026-06-03T12:15:32+00:00"
         },
         {
+            "name": "padosoft/laravel-rebel-bot-protection",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-bot-protection.git",
+                "reference": "2926c9e8779f0cd993e65bc0fec81d809c9701b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bot-protection/zipball/2926c9e8779f0cd993e65bc0fec81d809c9701b7",
+                "reference": "2926c9e8779f0cd993e65bc0fec81d809c9701b7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\BotProtection\\RebelBotProtectionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\BotProtection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Pluggable anti-bot / CAPTCHA gate for Laravel Rebel: server-side verification of Cloudflare Turnstile, Google reCAPTCHA v3 and hCaptcha tokens, fail-closed by default and fully audited. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-bot-protection",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "bot-protection",
+                "captcha",
+                "hcaptcha",
+                "laravel",
+                "padosoft",
+                "recaptcha",
+                "turnstile"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-bot-protection/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-bot-protection/tree/v0.1.0"
+            },
+            "time": "2026-06-04T00:14:14+00:00"
+        },
+        {
             "name": "padosoft/laravel-rebel-bridge-fortify",
             "version": "v0.1.1",
             "source": {
@@ -3265,6 +3622,520 @@
             "time": "2026-06-03T17:58:53+00:00"
         },
         {
+            "name": "padosoft/laravel-rebel-bridge-laragear-2fa",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa.git",
+                "reference": "73fa0ef2609d80a63494512be99b25db4a9a140e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bridge-laragear-2fa/zipball/73fa0ef2609d80a63494512be99b25db4a9a140e",
+                "reference": "73fa0ef2609d80a63494512be99b25db4a9a140e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "padosoft/laravel-rebel-step-up": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "laragear/two-factor": "^4.0",
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "padosoft/laravel-rebel-email-otp": "^0.1",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "suggest": {
+                "laragear/two-factor": "Enables the laragear_totp step-up driver and TOTP/recovery-code verification. Install it and add the TwoFactorAuthentication trait to your User model."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Bridge\\Laragear2fa\\RebelLaragear2faBridgeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Bridge\\Laragear2fa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Bridge between laragear/two-factor and Laravel Rebel: exposes TOTP as an AAL2 step-up driver, integrates recovery codes, and emits full audit telemetry into the Rebel audit trail. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "laragear",
+                "laravel",
+                "padosoft",
+                "step-up",
+                "totp",
+                "two-factor"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-bridge-laragear-2fa/tree/v0.1.1"
+            },
+            "time": "2026-06-04T04:35:06+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-bridge-otpz",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-bridge-otpz.git",
+                "reference": "f6ee13c2cd6e4292e9d93db7b80828875e4c01c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bridge-otpz/zipball/f6ee13c2cd6e4292e9d93db7b80828875e4c01c1",
+                "reference": "f6ee13c2cd6e4292e9d93db7b80828875e4c01c1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "padosoft/laravel-rebel-step-up": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "benbjurstrom/otpz": "^0.7.0",
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "suggest": {
+                "benbjurstrom/otpz": "Enables the OTP email one-time-password step-up driver. Requires the otpz migrations and the Otpable interface on the user model."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Bridge\\Otpz\\RebelOtpzBridgeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Bridge\\Otpz\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Bridge the benbjurstrom/otpz email one-time-password package into Laravel Rebel step-up. Exposes OTP email magic-code as a step-up driver (AAL2, AMR otp). Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-bridge-otpz",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "laravel",
+                "one-time-password",
+                "otp",
+                "padosoft",
+                "step-up"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-bridge-otpz/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-bridge-otpz/tree/v0.1.0"
+            },
+            "time": "2026-06-04T02:08:21+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-bridge-passkeys",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-bridge-passkeys.git",
+                "reference": "17c09c8e5499e0e8528a90de66541b4aff9b5dcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bridge-passkeys/zipball/17c09c8e5499e0e8528a90de66541b4aff9b5dcf",
+                "reference": "17c09c8e5499e0e8528a90de66541b4aff9b5dcf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "padosoft/laravel-rebel-step-up": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "padosoft/laravel-rebel-email-otp": "^0.1",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0",
+                "spatie/laravel-passkeys": "^1.0"
+            },
+            "suggest": {
+                "spatie/laravel-passkeys": "Provides the SpatiePasskeyChallenger implementation backed by spatie/laravel-passkeys. Without it, bind your own PasskeyChallenger to the container."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Bridge\\Passkeys\\RebelPasskeysBridgeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Bridge\\Passkeys\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "WebAuthn passkey step-up driver for Laravel Rebel: bridges spatie/laravel-passkeys into Rebel's step-up registry, issuing phishing-resistant AAL3 challenges.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-bridge-passkeys",
+            "keywords": [
+                "Authentication",
+                "FIDO2",
+                "Rebel",
+                "laravel",
+                "padosoft",
+                "passkey",
+                "step-up",
+                "webauthn"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-bridge-passkeys/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-bridge-passkeys/tree/v0.1.0"
+            },
+            "time": "2026-06-04T02:05:42+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-bridge-spatie-otp",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-bridge-spatie-otp.git",
+                "reference": "f7720395db384a4e186df57fa738b7400f5c53a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-bridge-spatie-otp/zipball/f7720395db384a4e186df57fa738b7400f5c53a6",
+                "reference": "f7720395db384a4e186df57fa738b7400f5c53a6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "padosoft/laravel-rebel-step-up": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0",
+                "spatie/laravel-one-time-passwords": "^1.0"
+            },
+            "suggest": {
+                "spatie/laravel-one-time-passwords": "Enables the spatie_otp step-up driver. Add the HasOneTimePasswords trait to your user model to activate it."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Bridge\\SpatieOtp\\RebelSpatieOtpBridgeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Bridge\\SpatieOtp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Bridge between spatie/laravel-one-time-passwords and Laravel Rebel: exposes email/SMS OTP as an AAL2 step-up driver with full audit telemetry. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-bridge-spatie-otp",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "laravel",
+                "one-time-password",
+                "otp",
+                "padosoft",
+                "spatie",
+                "step-up"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-bridge-spatie-otp/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-bridge-spatie-otp/tree/v0.1.0"
+            },
+            "time": "2026-06-04T02:03:47+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-channel-bird",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-channel-bird.git",
+                "reference": "45b517616aee3819812604cba01578a792dc4d57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channel-bird/zipball/45b517616aee3819812604cba01578a792dc4d57",
+                "reference": "45b517616aee3819812604cba01578a792dc4d57",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-channels": "^0.1",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Channel\\Bird\\RebelBirdServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Channel\\Bird\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Bird (formerly MessageBird) provider for Laravel Rebel Channels: phone verification via the Bird Verify API (SMS), plain SMS delivery, and signed delivery-status webhooks. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-channel-bird",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "bird",
+                "laravel",
+                "messagebird",
+                "padosoft",
+                "sms",
+                "verify"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-channel-bird/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-channel-bird/tree/v0.1.0"
+            },
+            "time": "2026-06-04T00:15:30+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-channel-discord",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-channel-discord.git",
+                "reference": "4a83cf6d1038f5f235657befa142ee514db45904"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channel-discord/zipball/4a83cf6d1038f5f235657befa142ee514db45904",
+                "reference": "4a83cf6d1038f5f235657befa142ee514db45904",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-channels": "^0.1",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Channel\\Discord\\RebelDiscordServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Channel\\Discord\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Discord delivery channel for Laravel Rebel Channels: ship security/SOC alerts (anomaly cases, lockouts, high-risk events) and notifications to a Discord channel via webhook. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-channel-discord",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "alerts",
+                "discord",
+                "laravel",
+                "padosoft",
+                "soc",
+                "webhook"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-channel-discord/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-channel-discord/tree/v0.1.0"
+            },
+            "time": "2026-06-04T00:27:10+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-channel-telegram",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-channel-telegram.git",
+                "reference": "f80bdcb814d82310324bd11a57b2b95113f621c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channel-telegram/zipball/f80bdcb814d82310324bd11a57b2b95113f621c2",
+                "reference": "f80bdcb814d82310324bd11a57b2b95113f621c2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-channels": "^0.1",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Channel\\Telegram\\RebelTelegramServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Channel\\Telegram\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Telegram bot delivery channel for Laravel Rebel Channels: deliver OTP codes and security alerts to a Telegram chat. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-channel-telegram",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "alerts",
+                "bot",
+                "laravel",
+                "otp",
+                "padosoft",
+                "telegram"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-channel-telegram/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-channel-telegram/tree/v0.1.0"
+            },
+            "time": "2026-06-04T00:16:39+00:00"
+        },
+        {
             "name": "padosoft/laravel-rebel-channel-twilio",
             "version": "v0.1.1",
             "source": {
@@ -3337,17 +4208,88 @@
             "time": "2026-06-03T19:34:45+00:00"
         },
         {
-            "name": "padosoft/laravel-rebel-channels",
+            "name": "padosoft/laravel-rebel-channel-vonage",
             "version": "v0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padosoft/laravel-rebel-channels.git",
-                "reference": "048d890918037241394f163f267056bed4cece72"
+                "url": "https://github.com/padosoft/laravel-rebel-channel-vonage.git",
+                "reference": "58aca09ccc454276e213f618fd630d88534c6bea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channels/zipball/048d890918037241394f163f267056bed4cece72",
-                "reference": "048d890918037241394f163f267056bed4cece72",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channel-vonage/zipball/58aca09ccc454276e213f618fd630d88534c6bea",
+                "reference": "58aca09ccc454276e213f618fd630d88534c6bea",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "padosoft/laravel-rebel-channels": "^0.1",
+                "padosoft/laravel-rebel-core": "^0.1",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.92"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.18",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Padosoft\\Rebel\\Channel\\Vonage\\RebelVonageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Padosoft\\Rebel\\Channel\\Vonage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Padosoft",
+                    "email": "support@padosoft.com",
+                    "homepage": "https://www.padosoft.com"
+                }
+            ],
+            "description": "Vonage provider for Laravel Rebel Channels: phone verification via Vonage Verify (SMS/voice), plain SMS delivery, and signed delivery-receipt webhooks. Part of padosoft/laravel-rebel-*.",
+            "homepage": "https://github.com/padosoft/laravel-rebel-channel-vonage",
+            "keywords": [
+                "Authentication",
+                "Rebel",
+                "laravel",
+                "nexmo",
+                "padosoft",
+                "sms",
+                "verify",
+                "vonage"
+            ],
+            "support": {
+                "issues": "https://github.com/padosoft/laravel-rebel-channel-vonage/issues",
+                "source": "https://github.com/padosoft/laravel-rebel-channel-vonage/tree/v0.1.0"
+            },
+            "time": "2026-06-04T00:04:22+00:00"
+        },
+        {
+            "name": "padosoft/laravel-rebel-channels",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padosoft/laravel-rebel-channels.git",
+                "reference": "75383ba82175d9a7a68f0750e74d5fddf463aa94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padosoft/laravel-rebel-channels/zipball/75383ba82175d9a7a68f0750e74d5fddf463aa94",
+                "reference": "75383ba82175d9a7a68f0750e74d5fddf463aa94",
                 "shasum": ""
             },
             "require": {
@@ -3399,9 +4341,9 @@
             ],
             "support": {
                 "issues": "https://github.com/padosoft/laravel-rebel-channels/issues",
-                "source": "https://github.com/padosoft/laravel-rebel-channels/tree/v0.1.0"
+                "source": "https://github.com/padosoft/laravel-rebel-channels/tree/v0.1.2"
             },
-            "time": "2026-06-03T09:35:08+00:00"
+            "time": "2026-06-04T00:59:04+00:00"
         },
         {
             "name": "padosoft/laravel-rebel-core",
@@ -4860,6 +5802,82 @@
             "time": "2025-12-14T04:43:48+00:00"
         },
         {
+            "name": "spatie/laravel-one-time-passwords",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-one-time-passwords.git",
+                "reference": "e67430d9cfabcedda67ec8d276c9145c8db1e08a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-one-time-passwords/zipball/e67430d9cfabcedda67ec8d276c9145c8db1e08a",
+                "reference": "e67430d9cfabcedda67ec8d276c9145c8db1e08a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.4",
+                "spatie/laravel-package-tools": "^1.92.7"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.25.1",
+                "livewire/livewire": "^3.7|^4.0",
+                "nunomaduro/collision": "^8.8.3",
+                "orchestra/testbench": "^10.0.0|^11.0",
+                "pestphp/pest": "^3.0|^4.1.5",
+                "pestphp/pest-plugin-laravel": "^3.0|^4.0",
+                "phpstan/phpstan": "^2.1.32",
+                "spatie/laravel-ray": "^1.43.1"
+            },
+            "suggest": {
+                "livewire/flux": "For an enhanced OTP input UI component"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\OneTimePasswords\\OneTimePasswordsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\OneTimePasswords\\": "src/",
+                    "Spatie\\OneTimePasswords\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Use one-time passwords (OTP) to authenticate in your Laravel app",
+            "homepage": "https://github.com/spatie/laravel-one-time-passwords",
+            "keywords": [
+                "laravel",
+                "laravel-one-time-passwords",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-one-time-passwords/issues",
+                "source": "https://github.com/spatie/laravel-one-time-passwords/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-08T07:34:03+00:00"
+        },
+        {
             "name": "spatie/laravel-package-tools",
             "version": "1.93.1",
             "source": {
@@ -4919,6 +5937,84 @@
                 }
             ],
             "time": "2026-05-19T14:06:37+00:00"
+        },
+        {
+            "name": "spatie/laravel-passkeys",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-passkeys.git",
+                "reference": "3677735abd5f772672e4dfc907967165164c15cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-passkeys/zipball/3677735abd5f772672e4dfc907967165164c15cb",
+                "reference": "3677735abd5f772672e4dfc907967165164c15cb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "php": "^8.2|^8.3|^8.4",
+                "spatie/laravel-package-tools": "^1.16",
+                "web-auth/webauthn-lib": "^5.3"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.4",
+                "laravel/pint": "^1.14",
+                "livewire/livewire": "^3.5 || ^4.0",
+                "nunomaduro/collision": "^8.1.1",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^3.0|^4.0",
+                "pestphp/pest-plugin-arch": "^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^3.0|^4.0",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "spatie/laravel-ray": "^1.35"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelPasskeys\\LaravelPasskeysServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPasskeys\\": "src/",
+                    "Spatie\\LaravelPasskeys\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Use passkeys in your Laravel app",
+            "homepage": "https://github.com/spatie/laravel-passkeys",
+            "keywords": [
+                "laravel",
+                "laravel-passkeys",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-passkeys/issues",
+                "source": "https://github.com/spatie/laravel-passkeys/tree/1.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-05-26T13:48:34+00:00"
         },
         {
             "name": "spomky-labs/cbor-php",

@@ -78,9 +78,10 @@
                 <p>channels + channel-twilio — send a <strong>real</strong> SMS verification; the send + verify
                     are recorded on the audit trail and show up in the panel's Channel Performance.</p>
             </a>
-            <a class="card" style="opacity:.5; pointer-events:none">
-                <h3>More drivers — coming</h3>
-                <p>Vonage, Bird, WhatsApp, voice… each plugs into the same channels router and tracks the same way.</p>
+            <a class="card" href="/demo/extras">
+                <h3>9 new packages — extras hub</h3>
+                <p>bot-protection (Turnstile) · Vonage · Bird · Telegram · Discord channels · passkeys, spatie-otp,
+                   laragear-2fa, otpz step-up bridges. Live registry dump + Turnstile demo + bridge OTP end-to-end.</p>
             </a>
         </div>
 
@@ -119,7 +120,10 @@
         <footer>
             Suite: <code>core</code> · <code>email-otp</code> · <code>step-up</code> · <code>bridge-fortify</code> ·
             <code>channels</code> · <code>channel-twilio</code> · <code>admin-api</code> · <code>admin</code> ·
-            <code>sessions</code> · <code>recovery</code> · <code>ai-guard</code>
+            <code>sessions</code> · <code>recovery</code> · <code>ai-guard</code> ·
+            <code>bot-protection</code> · <code>channel-vonage</code> · <code>channel-bird</code> ·
+            <code>channel-telegram</code> · <code>channel-discord</code> · <code>bridge-passkeys</code> ·
+            <code>bridge-spatie-otp</code> · <code>bridge-laragear-2fa</code> · <code>bridge-otpz</code>
         </footer>
     </div>
 </body>

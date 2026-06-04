@@ -18,6 +18,11 @@ use Padosoft\Rebel\EmailOtp\RebelEmailOtp;
 use Padosoft\Rebel\Recovery\RecoveryCodeManager;
 use Padosoft\Rebel\Sessions\Enums\SessionType;
 use Padosoft\Rebel\Sessions\SessionManager;
+use Padosoft\Rebel\BotProtection\RebelBotProtectionServiceProvider;
+use Padosoft\Rebel\Channels\Routing\DeliveryChannelRegistry;
+use Padosoft\Rebel\Channels\Routing\ProviderRegistry;
+use Padosoft\Rebel\Core\Contracts\BotProtection;
+use Padosoft\Rebel\StepUp\DriverRegistry;
 use Padosoft\Rebel\StepUp\RebelStepUp;
 use Padosoft\Rebel\StepUp\StepUpContext;
 
@@ -325,3 +330,139 @@ Route::get('/demo/ai-guard', function (Request $request, AuditLogger $audit, Key
         ],
     ], options: JSON_PRETTY_PRINT);
 })->name('demo.ai-guard');
+
+/*
+|--------------------------------------------------------------------------
+| Extras hub — 9 new packages (bot-protection, channels, bridges)
+|--------------------------------------------------------------------------
+| /demo/extras is the live registry dump + demo forms for the 9 packages
+| added in feat/integrate-9-extras: bot-protection (Turnstile), delivery
+| channels (Vonage, Bird, Telegram, Discord), and step-up bridges
+| (passkeys, spatie-otp, laragear-2fa, otpz).
+*/
+
+Route::get('/demo/extras', function (
+    Request $request,
+    DriverRegistry $driverRegistry,
+    DeliveryChannelRegistry $deliveryRegistry,
+    ProviderRegistry $providerRegistry,
+    BotProtection $botProtection,
+) {
+    // Pick the best available email-OTP bridge driver to exercise end-to-end.
+    // Prefer 'otpz' (simpler, just needs Otpable + db); fall back to 'spatie_otp'.
+    $preferredOtpDrivers = ['otpz', 'spatie_otp'];
+    $activeOtpDriver = 'otpz';
+    foreach ($preferredOtpDrivers as $k) {
+        if ($driverRegistry->get($k) !== null) {
+            $activeOtpDriver = $k;
+            break;
+        }
+    }
+
+    $bridgeDriverAvailable = $driverRegistry->get($activeOtpDriver) !== null;
+
+    // Restore bridge step from session.
+    $bridgeStep = $request->session()->get('demo_extras_bridge_step', 'start');
+
+    return view('demo.extras', [
+        'drivers'              => $driverRegistry->all(),
+        'deliveryChannels'     => $deliveryRegistry->all(),
+        'providers'            => $providerRegistry->all(),
+        'botDriver'            => config('rebel-bot-protection.driver', 'always'),
+        'botSiteKey'           => config('rebel-bot-protection.turnstile.site_key', ''),
+        'botResult'            => $request->session()->get('demo_extras_bot_result'),
+        'activeOtpDriver'      => $activeOtpDriver,
+        'bridgeDriverAvailable' => $bridgeDriverAvailable,
+        'bridgeStep'           => $bridgeStep,
+    ]);
+})->name('demo.extras');
+
+// ── Bot-protection Turnstile token verification ───────────────────────────────
+Route::post('/demo/extras/bot', function (Request $request, BotProtection $botProtection, KeyedHasher $hasher) {
+    $token = $request->input('cf-turnstile-response');
+
+    $context = SecurityContext::fromRequest($request, $hasher)->withPurpose('demo-bot-check');
+    $passed  = $botProtection->passes($context, is_string($token) ? $token : null);
+
+    return redirect()->route('demo.extras')
+        ->with('demo_extras_bot_result', $passed)
+        ->with('extras_ok', $passed)
+        ->with('extras_status', $passed
+            ? 'Turnstile token accepted — bot.check.passed recorded in the audit log.'
+            : 'Turnstile token rejected — bot.check.failed recorded in the audit log.');
+})->name('demo.extras.bot');
+
+// ── Bridge step-up: start (issue OTP via selected bridge driver) ──────────────
+Route::middleware(['web', 'auth'])->group(function (): void {
+    Route::post('/demo/extras/bridge/start', function (
+        Request $request,
+        DriverRegistry $driverRegistry,
+        KeyedHasher $hasher,
+    ) {
+        $driverKey = $request->input('driver', 'otpz');
+        $driver    = $driverRegistry->get(is_string($driverKey) ? $driverKey : 'otpz');
+
+        if ($driver === null) {
+            return back()->withErrors(['code' => "Driver '{$driverKey}' not registered."]);
+        }
+
+        $user    = $request->user();
+        $purpose = 'demo-extras-bridge';
+        $context = new StepUpContext(
+            $user,
+            $purpose,
+            SecurityContext::fromRequest($request, $hasher)->withPurpose($purpose),
+        );
+
+        $reference = $driver->start($context);
+
+        $request->session()->put('demo_extras_bridge', [
+            'driver'    => $driverKey,
+            'reference' => $reference,
+            'purpose'   => $purpose,
+        ]);
+        $request->session()->put('demo_extras_bridge_step', 'verify');
+
+        return redirect()->route('demo.extras');
+    })->name('demo.extras.bridge.start');
+
+    Route::post('/demo/extras/bridge/verify', function (
+        Request $request,
+        DriverRegistry $driverRegistry,
+        KeyedHasher $hasher,
+    ) {
+        $request->validate(['code' => ['required', 'string']]);
+
+        $session = $request->session()->get('demo_extras_bridge');
+        if (! is_array($session)) {
+            return redirect()->route('demo.extras');
+        }
+
+        $driverKey = is_string($session['driver'] ?? null) ? $session['driver'] : 'otpz';
+        $driver    = $driverRegistry->get($driverKey);
+
+        if ($driver === null) {
+            return redirect()->route('demo.extras');
+        }
+
+        $user    = $request->user();
+        $purpose = is_string($session['purpose'] ?? null) ? $session['purpose'] : 'demo-extras-bridge';
+        $context = new StepUpContext(
+            $user,
+            $purpose,
+            SecurityContext::fromRequest($request, $hasher)->withPurpose($purpose),
+        );
+
+        $reference = isset($session['reference']) && is_string($session['reference']) ? $session['reference'] : null;
+        $ok        = $driver->verify($context, $request->string('code')->toString(), $reference);
+
+        if (! $ok) {
+            return back()->withErrors(['code' => 'Invalid or expired code — check your Mailtrap inbox.']);
+        }
+
+        $request->session()->forget('demo_extras_bridge');
+        $request->session()->put('demo_extras_bridge_step', 'done');
+
+        return redirect()->route('demo.extras');
+    })->name('demo.extras.bridge.verify');
+});

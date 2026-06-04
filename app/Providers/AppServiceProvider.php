@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Padosoft\Rebel\Bridge\Passkeys\Challengers\SpatiePasskeyChallenger;
+use Padosoft\Rebel\Bridge\Passkeys\Contracts\PasskeyChallenger;
 use Padosoft\Rebel\Core\Context\DeviceContext;
 use Padosoft\Rebel\Core\Contracts\DeviceTrust;
 use Padosoft\Rebel\Core\Contracts\KeyedHasher;
@@ -21,7 +23,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Bind the PasskeyChallenger contract so the bridge-passkeys service
+        // provider can register the 'passkeys' step-up driver into DriverRegistry.
+        // SpatiePasskeyChallenger is feature-detected: it only resolves if
+        // spatie/laravel-passkeys is installed (it is, in this demo).
+        if (class_exists(SpatiePasskeyChallenger::class)) {
+            $this->app->singleton(PasskeyChallenger::class, SpatiePasskeyChallenger::class);
+        }
+
     }
 
     /**
