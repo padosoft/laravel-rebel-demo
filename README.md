@@ -1,5 +1,8 @@
 # Laravel Rebel — Integration Demo
 
+> Official documentation: https://doc.laravel-rebel.padosoft.com
+
+
 > A real **Laravel 13** application that installs, activates and wires together the **entire
 > `padosoft/laravel-rebel-*` suite**, and exercises every package end to end — front-end (real
 > browser) and back-end. This is the **guarantee gate**: proof the ecosystem works together,
@@ -205,3 +208,4 @@ with it.
 ## License
 
 MIT — see [LICENSE](LICENSE). Built by [Padosoft](https://www.padosoft.com).
+
